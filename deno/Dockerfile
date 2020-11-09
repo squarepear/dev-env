@@ -1,4 +1,4 @@
-FROM squarepear/dev-env:latest
+FROM squarepear/dev-env:core
 
 # Install unzip which is required to install deno
 RUN apt-get update && apt-get install -y \

@@ -1,4 +1,4 @@
-FROM squarepear/dev-env:latest
+FROM squarepear/dev-env:core
 
 # Install nvm & latest lts version of Node
 RUN /bin/bash -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash && source $HOME/.nvm/nvm.sh && nvm install 'lts/*' && nvm alias default node && nvm use default"
