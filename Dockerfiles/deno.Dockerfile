@@ -1,19 +1,12 @@
 FROM squarepear/dev-env:core
 
-# Install unzip which is required to install deno
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  unzip \
-  && rm -rf /var/lib/apt/lists/*
-
 # Install latest version of Deno
-RUN curl -fsSL https://deno.land/x/install/install.sh | sh
+RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends \
+  unzip \
+  && curl -fsSL https://deno.land/x/install/install.sh | sh \
+  && sudo apt-get remove -y unzip \
+  && sudo rm -rf /var/lib/apt/lists/*
 
 # Add Deno to the path
-RUN echo 'export DENO_INSTALL="/root/.deno" && export PATH="$DENO_INSTALL/bin:$PATH"' >> ~/.bashrc
+RUN echo 'export DENO_INSTALL="$HOME/.deno" && export PATH="$DENO_INSTALL/bin:$PATH"' >> "$HOME/.profile"
 
-# Uninstall unzip to shrink image size
-RUN apt-get remove -y unzip
-
-WORKDIR /home/dev
-
-CMD ["/bin/bash"]
