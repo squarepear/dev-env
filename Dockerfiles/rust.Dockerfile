@@ -9,3 +9,6 @@ RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends \
 
 # Install latest version of Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
+
+# Add Rust to path
+RUN echo "export PATH=$HOME/.cargo/bin:$PATH" >> "$HOME/.profile"
