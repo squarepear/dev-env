@@ -1,10 +1,16 @@
 FROM squarepear/dev-env:core
 
-# Install nvm & latest lts version of Node
-RUN /bin/bash -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash && source $HOME/.nvm/nvm.sh && nvm install 'lts/*' && nvm alias default node && nvm use default"
+# Install nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | sh
 
-# Install Yarn package manager
-RUN /bin/bash -c "source $HOME/.nvm/nvm.sh && curl -o- -L https://yarnpkg.com/install.sh | bash"
+# Add nvm to the path
+RUN echo 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.bashrc
+
+# Install and use the latest lts version of Node
+RUN /bin/bash -c "source ~/.profile \
+  && nvm install 'lts/*' \
+  && nvm alias default node \
+  && nvm use default"
 
 WORKDIR /home/dev
 
