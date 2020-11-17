@@ -6,4 +6,5 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | s
 # Install and use the latest lts version of Node
 RUN nvm install 'lts/*' \
   && nvm alias default node \
-  && nvm use default
+  && nvm use default \
+  && npm i -g yarn
